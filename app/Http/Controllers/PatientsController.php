@@ -24,11 +24,6 @@ class PatientsController extends Controller
         return response()->json($this->patients->create($this->post));
     }
 
-    public function createSendMessage()
-    {
-        return response()->json($this->patients->createSendMessage($this->post));
-    }
-
     public function all()
     {
         return response()->json($this->patients->all());
@@ -41,7 +36,7 @@ class PatientsController extends Controller
 
     public function edit()
     {
-        return response()->json($this->message->edit($this->post));
+        return response()->json($this->patients->edit($this->post));
     }
 
 }

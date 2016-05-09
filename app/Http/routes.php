@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('patients/all', 'PatientseController@all')->middleware(['cors']);
+Route::post('patients/create', 'PatientsController@create')->middleware(['cors']);
+Route::get('patients/edit/{id}', 'PatientsController@all')->middleware(['cors']);

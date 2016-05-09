@@ -3,44 +3,42 @@
 namespace App\Http\Services;
 
 use App\Http\Repositories\Eloquent\PatientsRepository as PatientsRepository;
+use App\Http\Repositories\Eloquent\GuiasRepository as GuiasRepository;
 
-class PatientsService
+class GuiasService
 {
     private $patients;
+    private $guias;
 
-    public function __construct(PatientsRepository $patients)
+    public function __construct(PatientsRepository $patients, GuiasRepository $guias)
     {
         $this->patients = $patients;
+        $this->guias = $guias;
     }
 
     public function create(array $data)
     {
         $data = (isset($data['data']) ? $data['data'] : $data);
 
-        if (!isset($data['name'])) {
+        if(!isset($data['id_patient'])) {
             return [
                 "status" => false,
-                "message" => "Nome não especificado",
-            ];
-        } else if(!isset($data['plann_health'])) {
-            return [
-                "status" => false,
-                "message" => "Plano não especificado",
+                "message" => "Paciente não especificado",
             ];
         }
 
-        return $this->patients->create($data);
+        return $this->guias->create($data);
         
     }
 
     public function all()
     {
-        return $this->patients->all();
+        return $this->guias->all();
     }
 
     public function edit($id)
     {
-        $model_message = $this->patients->find($id['id']);
+        $model_message = $this->guias->find($id['id']);
         $data = $model_message->getAttributes();
 
         return $data;
@@ -48,8 +46,7 @@ class PatientsService
 
     public function delete($id)
     {
-        $data['status'] = 'deleted';
-        return $this->patients->update($data, $id['id']);
+        return $this->guias->delete($id['id']);
     }
 
 }
