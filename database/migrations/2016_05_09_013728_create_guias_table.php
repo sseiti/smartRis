@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateGuiasTable extends Migration
 {
@@ -10,7 +10,9 @@ class CreateGuiasTable extends Migration
      *
      * @return void
      */
-    Schema::create('guias', function (Blueprint $table) {
+    public function up()
+    {
+        Schema::create('guias', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ans');
             $table->string('guia');

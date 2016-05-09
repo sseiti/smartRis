@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreatePatientsTable extends Migration
 {
@@ -16,7 +16,7 @@ class CreatePatientsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('plann_health');
-            $table->enum('status', ['Active', 'Pending', 'Deleted'])->default('Pending');
+            $table->enum('status', ['Active', 'Pending', 'Deleted'])->default('Active');
             $table->timestamps();
         });
     }

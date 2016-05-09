@@ -9,12 +9,28 @@
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the controller to call when that URI is requested.
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('patients/all', 'PatientseController@all')->middleware(['cors']);
-Route::post('patients/create', 'PatientsController@create')->middleware(['cors']);
-Route::get('patients/edit/{id}', 'PatientsController@all')->middleware(['cors']);
+Route::group([
+    'middleware' => 'cors',
+], function () {
+    Route::group([
+        'prefix' => 'api',
+        //'middleware' => 'jwt.basic',
+    ], function () {
+        Route::get('patients/all', 'PatientsController@all');
+        Route::post('patients/create', 'PatientsController@create');
+        Route::get('patients/edit/{id}', 'PatientsController@edit');
+        Route::get('patients/delete/{id}', 'PatientsController@delete');
+
+        Route::get('guias/all', 'GuiasController@all');
+        Route::post('guias/create', 'GuiasController@create');
+        Route::get('guias/edit/{id}', 'GuiasController@edit');
+
+        Route::post('lote/generate', 'GuiasController@generateLote');
+    });
+});
